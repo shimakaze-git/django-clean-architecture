@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.contrib import admin
 from model_utils.models import TimeStampedModel
 
 from .constants import TicketStatus
@@ -18,3 +19,4 @@ class Ticket(TimeStampedModel):
     # def __str__(self):
     #     return f'{self.name}'
 
+admin.site.register(Ticket)

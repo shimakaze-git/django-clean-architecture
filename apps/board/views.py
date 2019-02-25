@@ -10,6 +10,7 @@ from django.utils.decorators import method_decorator
 # Create your views here.
 
 from ..common.exceptions import EntityDoesNotExist
+from .serializers import TicketSerializer
 
 
 class ViewWrapper(View):
@@ -53,17 +54,15 @@ class TicketView:
                 ticket = self.ticket_interactor.set_params(
                     identify
                 ).execute()
-
-                print(ticket)
             else:
-                print(self.ticket_interactor)
+                ticket = self.ticket_interactor.set_params().execute()
         except EntityDoesNotExist:
             body = {
                 'error': 'Ticket does not exist!'
             }
             status = 404
         else:
-            body = {}
+            body = TicketSerializer.serialize(ticket)
             status = 200
         
         return body, status
@@ -71,26 +70,3 @@ class TicketView:
     def post(self, **kwargs):
         
         return {'post': "POST"}, 200
-
-# from .factories import GetProductInteractorFactory
-# from .serializers import ProductSerializer
-
-
-# class ProductView(object):
-
-#     def __init__(self, get_product_interactor):
-#         self.get_product_interactor = get_product_interactor
-
-#     def get(self, reference):
-#         try:
-#             product = self.get_product_interactor \
-#                               .set_params(reference=reference) \ 
-#                               .execute() 
-#         except EntityDoesNotExist:
-#             body = {'error': 'Product does not exist!'}
-#             status = 404
-#         else:
-#             body = ProductSerializer.serialize(product)
-#             status = 200
-
-#         return body, status

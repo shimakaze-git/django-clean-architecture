@@ -23,3 +23,7 @@ class TicketRepo:
         # return self.__db_repo
         ticket = self.__db_repo.get_find_by_id(identify=identify)
         return ticket
+
+    def get_tickets(self):
+        tickets = self.__db_repo.get_find()
+        return tickets

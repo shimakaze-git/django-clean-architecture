@@ -24,28 +24,56 @@
     #     self.__identify = identify
     #     return self
 
+from datetime import date
+
 
 class Ticket:
     def __init__(self):
-        self.__identify = None
-        self.__description = None
-        self.__status = None
-        self.__assignee = None
-        self.__start = None
-        self.__end = None
+        self._identify = None
+        self._description = None
+        self._status = None
+        self._assignee = None
+        self._start = None
+        self._end = None
 
     def set_params(
         self,
         identify: int,
         description: str,
         status: str,
-        assignee: int
+        assignee: int,
+        start,
+        end
     ):
-        self.__identify = identify
-        self.__description = description
-        self.__status = status
+        self._identify = identify
+        self._description = description
+        self._status = status
+        self._assignee = assignee
+        self._start = start
+        self._end = end
+
         return self
 
     @property
     def identify(self):
-        return self.__identify
+        return self._identify
+
+    @property
+    def description(self):
+        return self._description
+
+    @property
+    def status(self):
+        return self._status
+
+    @property
+    def assignee(self):
+        return self._assignee
+
+    @property
+    def start(self):
+        return self._start
+
+    @property
+    def end(self):
+        return self._end

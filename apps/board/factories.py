@@ -1,6 +1,6 @@
 from .datastore import TicketDBRepository
 from .repositories import TicketRepo
-from .use_case import GetTicketInteractor
+from .use_case import GetTicketInteractor, GetAllTicketInteractor
 from .views import TicketView
 
 
@@ -30,6 +30,21 @@ class TicketRepoFactory:
 
 
 """ GET Request """
+class GetAllTicketInteractorFactory(object):
+
+    @staticmethod
+    def get():
+        ticket_repo = TicketRepoFactory.get()
+        return GetAllTicketInteractor(ticket_repo)
+
+
+class GetAllTicketViewFactory:
+    @staticmethod
+    def create():
+        get_ticket_interactor = GetAllTicketInteractorFactory.get()
+        return TicketView(get_ticket_interactor)
+
+
 class GetTicketInteractorFactory(object):
 
     @staticmethod
